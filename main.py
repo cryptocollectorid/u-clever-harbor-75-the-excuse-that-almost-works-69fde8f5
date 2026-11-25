@@ -31,6 +31,9 @@ def main() -> int:
     if not LINE.strip():
         print("entry is only whitespace", file=sys.stderr)
         return 1
+    if "\n" in LINE or "\r" in LINE:
+        print("entry must be one line, no line breaks", file=sys.stderr)
+        return 1
     out_dir = os.environ.get("OUTPUT_DIR", "/output")
     os.makedirs(out_dir, exist_ok=True)
     with open(os.path.join(out_dir, "entry.txt"), "w", encoding="utf-8") as f:
